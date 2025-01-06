@@ -1,23 +1,21 @@
 using States;
 using UnityEngine;
 using UnityEngine.AI;
+using States;
 
 public class Dog : MonoBehaviour
 {
-    private NavMeshAgent _agent;
     
-    private NavStateMachine _stateMachine;
+    private DogStateMachine _stateMachine;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _stateMachine = new NavStateMachine(_agent);
+        _stateMachine = new DogStateMachine(GetComponent<NavMeshAgent>());
     }
 
-    // Update is called once per frame
     private void Update()
     {
-        _stateMachine.Request();
+        _stateMachine.Update();
     }
 }

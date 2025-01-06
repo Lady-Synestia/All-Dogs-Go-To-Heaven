@@ -7,16 +7,17 @@ namespace States
     {
         protected State CurrentState;
         
-        public void Request()
+        public void Update()
         {
             CurrentState.Execute();
         }
     }
 
-    public class NavStateMachine : StateMachine
+    public class DogStateMachine : StateMachine
     {
         private NavMeshAgent _agent;
-        public NavStateMachine(NavMeshAgent agent)
+        
+        public DogStateMachine(NavMeshAgent agent)
         {
             _agent = agent;
             CurrentState = new SeekState(agent, Vector3.zero);

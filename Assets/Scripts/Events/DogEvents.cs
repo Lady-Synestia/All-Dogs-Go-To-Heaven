@@ -16,9 +16,9 @@ namespace Events
     {
         public event EventHandler<DogEvent> OnEvent;
 
-        public void RaiseEvent()
+        public void RaiseEvent(DogEvent e)
         {
-            OnEvent?.Invoke(this, new DogEvent(DogEvent.Type.Move));
+            OnEvent?.Invoke(this, e);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Events
     {
         public event EventHandler<T> OnEvent;
         
-        public void RaiseEvent();
+        public void RaiseEvent(T e);
     }
 
     public abstract class GameEvent

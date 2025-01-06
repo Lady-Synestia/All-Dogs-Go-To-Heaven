@@ -534,6 +534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1270860869}
+  - component: {fileID: 1270860870}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -549,14 +550,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270860868}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.08264781, y: -0, z: -0, w: 0.9965789}
   m_LocalPosition: {x: 0, y: 5.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.482, y: 0, z: 0}
+--- !u!114 &1270860870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270860868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07682abe951166040a178f6a3a3d67e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 0.05
+  rotationSpeed: 0.1
 --- !u!1 &1281505399
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7dd67afa3b9664d999f8ba7691fcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1775328366}
 --- !u!195 &1775328366
 NavMeshAgent:
   m_ObjectHideFlags: 0
