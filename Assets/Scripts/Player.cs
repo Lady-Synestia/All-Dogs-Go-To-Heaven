@@ -27,16 +27,42 @@ public class Player : MonoBehaviour
                 var moveEvent = (MovementEvent)e;
                 Vector3 rawValues = moveEvent.Value;
                 Vector3 rotatedValues = new Vector3(0f, rawValues.y, 0f);
+
+                float theta = transform.eulerAngles.y;
+                float alpha;
+                Vector3 scalar;
+                switch (theta)
+                {
+                    case > 270:
+                        scalar = new Vector3(-1f, 1f, 1f);
+                        alpha = theta - 270;
+                        break;
+                    case > 180:
+                        scalar = new Vector3(-1f, 1f, -1f);
+                        alpha = theta - 180;
+                        break;
+                    case > 90:
+                        scalar = new Vector3(1f, 1f, -1f);
+                        alpha = theta - 90;
+                        break;
+                    default:
+                        scalar = new Vector3(1f, 1f, 1f);
+                        alpha = theta;
+                        break;
+                }
+
+                if (alpha > 45)
+                {
+                    alpha = 90 - alpha;
+                    (rotatedValues.z, rotatedValues.x) = RotateMovement(rawValues.z, rawValues.x, alpha);
+                }
+                else
+                {
+                    (rotatedValues.x, rotatedValues.z) = RotateMovement(rawValues.x, rawValues.z, alpha);
+                }
                 
-                float theta = (transform.eulerAngles.y) * Mathf.Deg2Rad;
-                float aSinTheta = Mathf.Asin(theta);
-                float aCosTheta = Mathf.Acos(theta);
-                float x = rawValues.x;
-                float z = rawValues.z;
-                rotatedValues.x = (x * aCosTheta) + (z  * aSinTheta);
-                rotatedValues.z = (x * aSinTheta) + (z * aCosTheta);
                 
-                gameObject.transform.position += rotatedValues * movementSpeed;
+                gameObject.transform.position += Vector3.Scale(rotatedValues, scalar) * movementSpeed;
                 break;
             
             case PlayerEvent.Type.Look:
@@ -46,5 +72,15 @@ public class Player : MonoBehaviour
                 gameObject.transform.rotation = rotation;
                 break;
         }
+    }
+
+    private (float opp, float adj) RotateMovement(float opp, float adj, float alpha)
+    {
+        alpha *= Mathf.Deg2Rad;
+        float aSinAlpha = Mathf.Asin(alpha);
+        float aCosAlpha = Mathf.Acos(alpha);
+        float oppOut = (opp * aCosAlpha) + (adj  * aSinAlpha);
+        float adjOut = (adj * aSinAlpha) + (opp * aCosAlpha);
+        return (oppOut, adjOut);
     }
 }
