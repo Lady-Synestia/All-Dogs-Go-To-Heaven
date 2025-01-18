@@ -1,4 +1,3 @@
-using System;
 using Events.DogEvents;
 using States;
 using UnityEngine;
@@ -8,14 +7,14 @@ public class Dog : MonoBehaviour
 {
     
     private StateMachine _stateMachine;
-    private StimulusObserver _stimulusObserver;
+    private DogEventObserver _eventObserver;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         _stateMachine = new StateMachine(GetComponent<NavMeshAgent>());
-        _stimulusObserver = gameObject.AddComponent<StimulusObserver>();
-        _stimulusObserver.OnEvent += StimulusEncountered;
+        _eventObserver = gameObject.AddComponent<DogEventObserver>();
+        _eventObserver.OnEvent += EventRaised;
     }
 
     private void Update()
@@ -23,23 +22,20 @@ public class Dog : MonoBehaviour
         _stateMachine.Update();
     }
 
-    private void StimulusEncountered(object sender, DogEvent e)
+    private void EventRaised(object sender, DogEvent e)
     {
-        var stimulusEvent = (StimulusEvent)e;
-        Stimulus stimulus = stimulusEvent.Stimulus;
-        switch (stimulus.Sense)
+        switch (e.EventType)
         {
-            case Stimulus.SenseType.Visual:
-                Debug.Log($"Visual Stimulus Encountered. Strength: {stimulus.Strength}");
+            case DogEvent.Type.Stimulus:
+                var stimulusArgs = (StimulusEventArgs)e.Args;
+                StimulusEncountered(stimulusArgs.Stimulus);
                 break;
-            case Stimulus.SenseType.Auditory:
-                Debug.Log($"Auditory Stimulus Encountered. Strength: {stimulus.Strength}");
-                break;
-            case Stimulus.SenseType.Olfactory:
-                Debug.Log($"Olfactory Stimulus Encountered. Strength: {stimulus.Strength}");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
+    }
+
+    private void StimulusEncountered(Stimulus stimulus)
+    {
+        Debug.Log($"Stimulus encountered: {stimulus.Sense}, Strength: {stimulus.Strength}");
+        _stateMachine.SetTarget(stimulus.transform.parent);
     }
 }

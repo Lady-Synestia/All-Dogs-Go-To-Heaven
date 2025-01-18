@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using UnityEngine.InputSystem;
 
 namespace Events.PlayerEvents
@@ -22,7 +21,12 @@ namespace Events.PlayerEvents
         {
             if (_moveAction.IsPressed())
             {
-                RaiseEvent(new MovementEvent(_moveAction.ReadValue<Vector3>(), PlayerEvent.Type.Move));
+                MovementEventArgs args = new ()
+                {
+                    Value = _moveAction.ReadValue<Vector3>()
+                };
+                
+                RaiseEvent(new PlayerEvent(PlayerEvent.Type.Move, args));
             }
 
             if (_lookAction.IsPressed())
@@ -30,8 +34,13 @@ namespace Events.PlayerEvents
                 Vector2 look2D = _mousePosition.ReadValue<Vector2>();
                 if (look2D != Vector2.zero)
                 {
-                    var look3D = new Vector3(look2D.y, look2D.x, 0f);
-                    RaiseEvent(new MovementEvent(look3D, PlayerEvent.Type.Look));
+
+                    MovementEventArgs args = new()
+                    {
+                        Value = new Vector3(-look2D.y, look2D.x, 0f)
+                    };
+                    
+                    RaiseEvent(new PlayerEvent(PlayerEvent.Type.Look, args));
                 }
             }
         }

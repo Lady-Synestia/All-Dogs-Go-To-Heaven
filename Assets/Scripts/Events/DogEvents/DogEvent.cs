@@ -10,10 +10,6 @@ namespace Events.DogEvents
             Stimulus,
         }
 
-        public DogEvent(Type e) : base(e) { }
+        public DogEvent(Type type, EventArgs args) : base(type, args) { }
     }
-
-
-
-
 }

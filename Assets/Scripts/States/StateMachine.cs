@@ -5,19 +5,26 @@ namespace States
 {
     public class StateMachine
     {
-        private State _currentState;
+        internal State CurrentState;
+        internal NavMeshAgent Agent;
+        internal bool HasTarget = false;
+        internal Transform Target;
         
-        private NavMeshAgent _agent;
-
         public StateMachine(NavMeshAgent agent)
         {
-            _agent = agent;
-            _currentState = new SeekState(agent, Vector3.zero);
+            Agent = agent;
+            CurrentState = new IdleState(this);
         }
         
         public void Update()
         {
-            _currentState.Execute();
+            CurrentState.Execute();
+        }
+
+        public void SetTarget(Transform target)
+        {
+            Target = target;
+            HasTarget = true;
         }
     }
 }

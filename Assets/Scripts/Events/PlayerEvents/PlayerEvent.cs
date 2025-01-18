@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace Events.PlayerEvents
 {
@@ -10,8 +10,6 @@ namespace Events.PlayerEvents
             Look
         }
 
-        public PlayerEvent(Type e) : base(e) { }
+        public PlayerEvent(Type type, EventArgs args) : base(type, args) { }
     }
-
-    
 }

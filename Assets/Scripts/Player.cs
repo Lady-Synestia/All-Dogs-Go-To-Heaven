@@ -30,9 +30,9 @@ public class Player : MonoBehaviour
         switch (e.EventType)
         {
             case PlayerEvent.Type.Move:
-                var moveEvent = (MovementEvent)e;
-                Vector3 rotatedValues = new Vector3(0f, moveEvent.Value.y, 0f);
-                Vector2 direction2D = new Vector2(-moveEvent.Value.x, moveEvent.Value.z);
+                var moveArgs = (MovementEventArgs)e.Args;
+                Vector3 rotatedValues = new Vector3(0f, moveArgs.Value.y, 0f);
+                Vector2 direction2D = new Vector2(-moveArgs.Value.x, moveArgs.Value.z);
 
                 Vector3 scalar = Vector3.one;
                 if (direction2D != Vector2.zero)
@@ -75,9 +75,9 @@ public class Player : MonoBehaviour
                 break;
             
             case PlayerEvent.Type.Look:
-                var lookEvent = (MovementEvent)e;
+                var lookArgs = (MovementEventArgs)e.Args;
                 Quaternion rotation = transform.rotation;
-                rotation.eulerAngles += lookEvent.Value * rotationSpeed;
+                rotation.eulerAngles += lookArgs.Value * rotationSpeed;
                 gameObject.transform.rotation = rotation;
                 break;
         }

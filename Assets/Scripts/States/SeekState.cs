@@ -1,22 +1,31 @@
-﻿using UnityEngine.AI;
+﻿using Unity.VisualScripting;
+using UnityEngine.AI;
 using UnityEngine;
 
 namespace States
 {
-    public class SeekState : State
+    internal class SeekState : State
     {
-        private Vector3 _target;
-        protected NavMeshAgent Agent;
+        private Transform _target;
         
-        public override void Execute()
-        {  
-            // Debug.Log("Seek");
+        internal override void Execute()
+        {
+            if (StateMachine.Agent.remainingDistance == 0)
+            {
+                StateMachine.HasTarget = false;
+                StateMachine.CurrentState = new IdleState(StateMachine);
+            }
+            else if (StateMachine.Target != _target)
+            {
+                StateMachine.CurrentState = new SeekState(StateMachine, StateMachine.Target);
+            }
         }
 
-        public SeekState(NavMeshAgent agent, Vector3 target)
+        public SeekState(StateMachine stateMachine, Transform target) : base(stateMachine)
         {
-            this.Agent = agent;
+            StateMachine = stateMachine;
             _target = target;
+            StateMachine.Agent.destination = _target.position;
         }
     }
 }

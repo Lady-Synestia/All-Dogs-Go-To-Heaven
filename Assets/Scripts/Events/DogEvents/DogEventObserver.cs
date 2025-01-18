@@ -11,5 +11,15 @@ namespace Events.DogEvents
         {
             OnEvent?.Invoke(this, e);
         }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            StimulusEventArgs args = new StimulusEventArgs
+            {
+                Stimulus = other.GetComponent<Stimulus>()
+            };
+            
+            RaiseEvent(new DogEvent(DogEvent.Type.Stimulus, args));
+        }
     }
 }

@@ -2,21 +2,16 @@ using System;
 
 namespace Events
 {
-
-    internal interface IEventObserver<T>
-    {
-        public event EventHandler<T> OnEvent;
-        
-        public void RaiseEvent(T e);
-    }
-
     public abstract class GameEvent
     {
         public Enum EventType { get; private set; }
+        
+        public EventArgs Args { get; private set; }
 
-        protected GameEvent(Enum customEvent)
+        protected GameEvent(Enum eventType, EventArgs args)
         {
-            EventType = customEvent;
+            EventType = eventType;
+            Args = args;
         }
     }
 }
