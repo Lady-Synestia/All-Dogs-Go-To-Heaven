@@ -19,15 +19,22 @@ namespace Events
     {
         public Vector3 Value { get; private set; }
 
-        public MovementEvent(Vector3 value, Type e) : base(e)
+        public MovementEvent(Vector3 value, Type e) : base(e) { Value = value; }
+    }
+
+    public class PlayerEventObserver : MonoBehaviour, IEventObserver<PlayerEvent>
+    {
+        public event EventHandler<PlayerEvent> OnEvent;
+        
+        public void RaiseEvent(PlayerEvent e)
         {
-            Value = value;
+            OnEvent?.Invoke(this, e);
         }
     }
 
-    public class PlayerEventObserver: MonoBehaviour, IEventObserver<PlayerEvent>
+    public class PlayerMovementObserver: PlayerEventObserver
     {
-        public event EventHandler<PlayerEvent> OnEvent;
+        
         private InputAction _moveAction;
         private InputAction _lookAction;
         private InputAction _mousePosition;
@@ -55,11 +62,6 @@ namespace Events
                     RaiseEvent(new MovementEvent(look3D, PlayerEvent.Type.Look));
                 }
             }
-        }
-        
-        public void RaiseEvent(PlayerEvent e)
-        {
-            OnEvent?.Invoke(this, e);
         }
     }
 }
