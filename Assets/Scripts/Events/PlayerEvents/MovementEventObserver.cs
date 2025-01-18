@@ -1,37 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
-namespace Events
+namespace Events.PlayerEvents
 {
-    public class PlayerEvent : GameEvent
-    {
-        public enum Type
-        {
-            Move,
-            Look,
-        }
-
-        public PlayerEvent(Type e) : base(e) { }
-    }
-
-    public class MovementEvent : PlayerEvent
-    {
-        public Vector3 Value { get; private set; }
-
-        public MovementEvent(Vector3 value, Type e) : base(e) { Value = value; }
-    }
-
-    public class PlayerEventObserver : MonoBehaviour, IEventObserver<PlayerEvent>
-    {
-        public event EventHandler<PlayerEvent> OnEvent;
-        
-        public void RaiseEvent(PlayerEvent e)
-        {
-            OnEvent?.Invoke(this, e);
-        }
-    }
-
     public class PlayerMovementObserver: PlayerEventObserver
     {
         
@@ -39,7 +11,7 @@ namespace Events
         private InputAction _lookAction;
         private InputAction _mousePosition;
 
-        private void Start()
+        private void Awake()
         {
             _moveAction = InputSystem.actions.FindAction("Move");
             _lookAction = InputSystem.actions.FindAction("LookEnable");

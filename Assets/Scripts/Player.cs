@@ -1,4 +1,4 @@
-using Events;
+using Events.PlayerEvents;
 using UnityEngine;
 
 public class Player : MonoBehaviour
