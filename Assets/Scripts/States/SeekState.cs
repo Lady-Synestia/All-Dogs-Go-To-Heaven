@@ -1,31 +1,27 @@
-﻿using Unity.VisualScripting;
-using UnityEngine.AI;
-using UnityEngine;
-
-namespace States
+﻿namespace States
 {
     internal class SeekState : State
     {
-        private Transform _target;
+        private Stimulus _stimulus;
         
         internal override void Execute()
         {
-            if (StateMachine.Agent.remainingDistance == 0)
+            if (StateMachine.Agent.remainingDistance == 0 || _stimulus.Inspected())
             {
-                StateMachine.HasTarget = false;
-                StateMachine.CurrentState = new IdleState(StateMachine);
+                StateMachine.Queue.Dequeue();
+                StateMachine.CurrentState = new InspectState(StateMachine, _stimulus);
             }
-            else if (StateMachine.Target != _target)
+            else if (StateMachine.Queue.Peek() != _stimulus)
             {
-                StateMachine.CurrentState = new SeekState(StateMachine, StateMachine.Target);
+                StateMachine.CurrentState = new SeekState(StateMachine);
             }
         }
 
-        public SeekState(StateMachine stateMachine, Transform target) : base(stateMachine)
+        public SeekState(StateMachine stateMachine) : base(stateMachine)
         {
             StateMachine = stateMachine;
-            _target = target;
-            StateMachine.Agent.destination = _target.position;
+            _stimulus = StateMachine.Queue.Peek();
+            StateMachine.Agent.destination = _stimulus.transform.parent.position;
         }
     }
 }

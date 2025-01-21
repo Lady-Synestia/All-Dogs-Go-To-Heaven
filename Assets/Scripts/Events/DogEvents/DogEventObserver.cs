@@ -14,12 +14,15 @@ namespace Events.DogEvents
         
         private void OnTriggerEnter(Collider other)
         {
-            StimulusEventArgs args = new StimulusEventArgs
+            if (other.gameObject.CompareTag("Stimulus"))
             {
-                Stimulus = other.GetComponent<Stimulus>()
-            };
+                StimulusEventArgs args = new ()
+                {
+                    Stimulus = other.GetComponent<Stimulus>()
+                };
             
-            RaiseEvent(new DogEvent(DogEvent.Type.Stimulus, args));
+                RaiseEvent(new DogEvent(DogEvent.Type.Stimulus, args));
+            }
         }
     }
 }

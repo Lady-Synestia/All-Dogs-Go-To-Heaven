@@ -18,13 +18,13 @@ public class Stimulus : MonoBehaviour
     }
     
     public StimulusData Data { get; private set; }
-    
     public bool HasDecay { get; private set; }
     private int _timeSinceLastDecay;
     private SphereCollider _trigger;
     private void Awake()
     {
-        _trigger = this.gameObject.AddComponent<SphereCollider>();
+        _trigger = gameObject.AddComponent<SphereCollider>();
+        gameObject.tag = "Stimulus";
         _trigger.isTrigger = true;
     }
 
@@ -50,5 +50,23 @@ public class Stimulus : MonoBehaviour
                 HasDecay = false;
             }
         }
+    }
+
+    public void Encountered()
+    {
+        _trigger.enabled = false;
+    }
+
+    public bool Inspected()
+    {
+        Item item = transform.parent.GetComponent<Item>();
+        return item.Inspected;
+    }
+
+    public void Inspect()
+    {
+        Item item = transform.parent.GetComponent<Item>();
+        item.Inspected = true;
+        item.gameObject.SetActive(false);
     }
 }

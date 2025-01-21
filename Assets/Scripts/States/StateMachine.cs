@@ -7,8 +7,7 @@ namespace States
     {
         internal State CurrentState;
         internal readonly NavMeshAgent Agent;
-        internal bool HasTarget = false;
-        internal Transform Target;
+        internal BucketQueue<Stimulus> Queue = new();
         
         public StateMachine(NavMeshAgent agent)
         {
@@ -21,10 +20,12 @@ namespace States
             CurrentState.Execute();
         }
 
-        public void SetTarget(Transform target)
+        public void AddToQueue(Stimulus stimulus, int priority)
         {
-            Target = target;
-            HasTarget = true;
+            if (Queue.Insert(priority, stimulus))
+            {
+                CurrentState.Execute();
+            }
         }
     }
 }

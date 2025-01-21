@@ -1,15 +1,13 @@
-﻿using UnityEngine;
-
-namespace States
+﻿namespace States
 {
     internal class IdleState : State
     {
         
         internal override void Execute()
         {
-            if (StateMachine.HasTarget)
+            if (!StateMachine.Queue.IsEmpty())
             {
-                StateMachine.CurrentState = new SeekState(StateMachine, StateMachine.Target);
+                StateMachine.CurrentState = new SeekState(StateMachine);
             }
         }
 

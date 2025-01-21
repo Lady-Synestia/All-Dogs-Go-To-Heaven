@@ -3,7 +3,7 @@ using UnityEngine;
 public class ItemFactory : MonoBehaviour
 {
 
-    [Header("Spawner Settings")] [SerializeField] [Range(0, 10)]
+    [Header("Spawner Settings")] [SerializeField] [Range(0, 20)]
     private int numberOfItems = 5;
     
     [Header("Visual Weightings")]
