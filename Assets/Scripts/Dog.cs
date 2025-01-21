@@ -35,7 +35,7 @@ public class Dog : MonoBehaviour
 
     private void StimulusEncountered(Stimulus stimulus)
     {
-        Debug.Log($"Stimulus encountered: {stimulus.Sense}, Strength: {stimulus.Strength}");
+        Debug.Log($"Stimulus encountered: {stimulus.Data.Sense}, Strength: {stimulus.Data.Strength}");
         _stateMachine.SetTarget(stimulus.transform.parent);
     }
 }

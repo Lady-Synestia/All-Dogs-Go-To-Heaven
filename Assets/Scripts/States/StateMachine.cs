@@ -6,7 +6,7 @@ namespace States
     public class StateMachine
     {
         internal State CurrentState;
-        internal NavMeshAgent Agent;
+        internal readonly NavMeshAgent Agent;
         internal bool HasTarget = false;
         internal Transform Target;
         

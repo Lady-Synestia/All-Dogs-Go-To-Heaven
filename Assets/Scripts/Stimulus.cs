@@ -1,6 +1,12 @@
-using System;
 using UnityEngine;
-using Events;
+
+public record StimulusData(Stimulus.SenseType Sense, int Strength, int Range, int DecayRate = 0)
+{
+    public Stimulus.SenseType Sense { get; } = Sense;
+    public int Strength { get; set; } = Strength;
+    public int Range { get; } = Range;
+    public int DecayRate { get; set; } = DecayRate;
+}
 
 public class Stimulus : MonoBehaviour
 {
@@ -11,13 +17,9 @@ public class Stimulus : MonoBehaviour
         Olfactory,
     }
     
-    [SerializeField]
-    public int Range { get; private set; }
-    [SerializeField]
-    public int Strength { get; private set; }
-    public SenseType Sense { get; private set; }
+    public StimulusData Data { get; private set; }
+    
     public bool HasDecay { get; private set; }
-    private int _decayRate;
     private int _timeSinceLastDecay;
     private SphereCollider _trigger;
     private void Awake()
@@ -26,14 +28,11 @@ public class Stimulus : MonoBehaviour
         _trigger.isTrigger = true;
     }
 
-    public void Create(SenseType type, int range, int strength, int decayRate=0)
+    public void Create(StimulusData data)
     {
-        Range = range;
-        Strength = strength;
-        Sense = type;
-        HasDecay = decayRate > 0;
-        _decayRate = decayRate;
-        _trigger.radius = range;
+        Data = data;
+        HasDecay = data.DecayRate > 0;
+        _trigger.radius = data.Range;
     }
 
     public void Decay()
@@ -41,13 +40,13 @@ public class Stimulus : MonoBehaviour
         if (HasDecay)
         {
             _timeSinceLastDecay = Mathf.RoundToInt(Time.time - _timeSinceLastDecay);
-            Strength -= _decayRate * _timeSinceLastDecay;;
-            _trigger.radius -= _decayRate * _timeSinceLastDecay;;
+            Data.Strength -= Data.DecayRate * _timeSinceLastDecay;;
+            _trigger.radius -= Data.DecayRate * _timeSinceLastDecay;;
 
-            if (Strength <= 0)
+            if (Data.Strength <= 0)
             {
-                Strength = 0;
-                _decayRate = 0;
+                Data.Strength = 0;
+                Data.DecayRate = 0;
                 HasDecay = false;
             }
         }
