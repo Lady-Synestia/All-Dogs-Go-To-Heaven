@@ -23,18 +23,19 @@ namespace UI
         public static void ChangeScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
+            Time.timeScale = 1;
         }
 
         public static void Pause()
         {
             Time.timeScale = 0;
-            ChangeUI("HUD", "Pause");
+            ChangeUI("HUD", "PauseMenu");
         }
         
         public static void Resume()
         {
             Time.timeScale = 1;
-            ChangeUI("Pause", "HUD");
+            ChangeUI("PauseMenu", "HUD");
         }
     }
 }
