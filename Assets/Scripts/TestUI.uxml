@@ -1,6 +1,0 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:GroupBox style="align-items: center; justify-content: space-between; align-self: stretch;">
-        <engine:Label text="All Dogs Go To Heaven" style="height: 26px; width: 294px; -unity-text-align: upper-center;" />
-        <engine:Button text="Play" style="width: 203px; white-space: pre;" />
-    </engine:GroupBox>
-</engine:UXML>

@@ -46,7 +46,7 @@ public class Dog : MonoBehaviour
         stimulus.Encountered();
         float distance = Vector3.Distance(transform.position, stimulus.transform.position);
         int priority = Mathf.RoundToInt(stimulus.Data.Strength/ distance);
-        Debug.Log($"Item: {stimulus.transform.parent.name}. Stimulus: {stimulus.Data.Sense}. Priority: {priority}. Strength: {stimulus.Data.Strength}. Distance: {distance}.");
+        // Debug.Log($"Item: {stimulus.transform.parent.name}. Stimulus: {stimulus.Data.Sense}. Priority: {priority}. Strength: {stimulus.Data.Strength}. Distance: {distance}.");
         _stateMachine.AddToQueue(stimulus, priority);
         
     }

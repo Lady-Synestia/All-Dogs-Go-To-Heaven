@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     private int movementSpeed = 5;
     private float _movementSpeed;
     [SerializeField]
-    private float rotationSpeed = 0.1f;
+    [Range(1, 90)]
+    private float rotationSpeed = 30f;
+    private float _rotationSpeed;
     
     private PlayerMovementObserver _movementEventObserver;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,11 +20,11 @@ public class Player : MonoBehaviour
     {
         _movementEventObserver = gameObject.AddComponent<PlayerMovementObserver>();
         _movementEventObserver.OnEvent += MovementEventRaised;
-        
-        _movementSpeed = movementSpeed * 0.005f;
     }
-    private void Update()
+    private void FixedUpdate()
     {
+        _movementSpeed = movementSpeed * Time.fixedDeltaTime;
+        _rotationSpeed = rotationSpeed * Time.fixedDeltaTime;
     }
 
     private void MovementEventRaised(object caller, PlayerEvent e)
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
             case PlayerEvent.Type.Look:
                 var lookArgs = (MovementEventArgs)e.Args;
                 Quaternion rotation = transform.rotation;
-                rotation.eulerAngles += lookArgs.Value * rotationSpeed;
+                rotation.eulerAngles += lookArgs.Value * _rotationSpeed;
                 gameObject.transform.rotation = rotation;
                 break;
         }

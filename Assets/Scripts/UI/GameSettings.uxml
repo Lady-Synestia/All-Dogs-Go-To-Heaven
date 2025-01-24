@@ -1,0 +1,180 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Styles.uss?fileID=7433441132597879392&amp;guid=a50475ba300546241872d52c8b4fefd2&amp;type=3#Styles" />
+    <engine:VisualElement class="UI-Container" style="margin-bottom: 5%; margin-left: 25%; margin-right: 25%; border-left-color: rgb(63, 63, 63); border-right-color: rgb(63, 63, 63); border-top-color: rgb(63, 63, 63); border-bottom-color: rgb(63, 63, 63); color: rgb(255, 255, 255); background-color: rgb(63, 63, 63);">
+        <engine:Label text="Configure Game Settings&#10;" class="Subheading" />
+        <engine:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-around; align-content: center; align-items: flex-start;">
+            <engine:VisualElement style="flex-grow: 1; align-self: auto; align-items: flex-start; padding-left: 50px;">
+                <engine:VisualElement class="Slider-Container">
+                    <engine:Label text="Number of Items&#10;" name="Label" class="Slider-Label" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container">
+                    <engine:Label text="Visual Chance" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Chance in % for each item to have a visual stimulus" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container">
+                    <engine:Label text="Auditory Chance" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Chance in % for each item to have an auditory stimulus" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container">
+                    <engine:Label text="Olfactory Chance" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Chance in % for each item to have an olfactory stimulus" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement style="flex-grow: 1; height: 70px; justify-content: flex-end;">
+                    <engine:Label text="Advanced" class="Subheading" style="font-size: 30px; align-items: auto; align-self: flex-start;" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
+                    <engine:Label text="Visual Strength Weight" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Higher value = greater chance for stronger visual stimuli" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
+                    <engine:Label text="Visual Range Weight" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Higher value = greater chance for visual stimuli with a larger radius" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
+                    <engine:Label text="Auditory Strength Weight" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Higher value = greater chance for stronger auditory stimuli" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
+                    <engine:Label text="Auditory Range Weight" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Higher value = greater chance for auditory stimuli with a larger radius" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
+                    <engine:Label text="Olfactory Strength Weight" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Higher value = greater chance for stronger olfactory stimuli" class="hint" />
+                </engine:VisualElement>
+                <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
+                    <engine:Label text="Olfactory Range Weight" class="Slider-Label" />
+                    <engine:Label text="?" tooltip="Higher value = greater chance for olfactory stimuli with a larger radius" class="hint" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement name="VisualElement" style="flex-grow: 1; align-items: flex-start; align-self: flex-start; justify-content: flex-start; -unity-text-align: upper-left;">
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="42" high-value="50" low-value="1" fill="true" name="ItemSlider" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="spawnCount" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="spawnCount" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="00&#10;" name="Label" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="spawnCount" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="spawnCount" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="100" fill="true" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="visualChance" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="visualChance" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="visualChance" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="visualChance" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="100" fill="true" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="auditoryChance" class="Slider" style="flex-direction: row; margin-top: 15px; align-items: stretch; justify-content: center;">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="auditoryChance" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="auditoryChance" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="auditoryChance" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="100" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="olfactoryChance" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="olfactoryChance" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="olfactoryChance" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="olfactoryChance" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement style="flex-grow: 1; height: 60px;" />
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="10" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="visualStrengthWeight" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="visualStrengthWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="visualStrengthWeight" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="visualStrengthWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="10" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="visualRangeWeight" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="visualRangeWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="visualRangeWeight" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="visualRangeWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="10" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="auditoryStrengthWeight" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="auditoryStrengthWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="auditoryRangeWeight" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="auditoryStrengthWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="10" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="auditoryRangeWeight" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="auditoryRangeWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="auditoryRangeWeight" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="auditoryRangeWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="10" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="olfactoryStrengthWeight" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="olfactoryStrengthWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="olfactoryStrengthWeight" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="olfactoryStrengthWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+                <engine:VisualElement name="SliderContainer" class="Slider-Container">
+                    <engine:SliderInt value="100" high-value="10" fill="true" picking-mode="Ignore" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="olfactoryRangeWeight" class="Slider">
+                        <Bindings>
+                            <engine:DataBinding property="value" data-source-path="olfactoryRangeWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="TwoWay" />
+                        </Bindings>
+                    </engine:SliderInt>
+                    <engine:Label text="0&#10;" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" data-source-path="olfactoryRangeWeight" class="Slider-Value">
+                        <Bindings>
+                            <engine:DataBinding property="text" data-source-path="olfactoryRangeWeight" data-source="project://database/Assets/SpawnData.asset?fileID=11400000&amp;guid=91a656a2486922a48b8eaf75f8841f70&amp;type=2#SpawnData" binding-mode="ToTarget" />
+                        </Bindings>
+                    </engine:Label>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-start; align-content: auto; align-items: center; align-self: center;">
+            <engine:Button text="Back" name="Back" double-click-selects-word="false" triple-click-selects-line="false" focusable="false" class="Button" style="background-color: rgb(96, 96, 96);" />
+            <engine:Button text="Reset" name="Reset" triple-click-selects-line="false" double-click-selects-word="false" focusable="false" class="Button" style="background-color: rgb(96, 96, 96);" />
+            <engine:Button text="Play" name="Play" triple-click-selects-line="false" focusable="false" double-click-selects-word="false" class="Button" style="background-color: rgb(96, 96, 96);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

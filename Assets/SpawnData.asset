@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7207a8da271a7c43898340b77f7de91, type: 3}
+  m_Name: SpawnData
+  m_EditorClassIdentifier: 
+  spawnCount: 15
+  visualChance: 50
+  auditoryChance: 40
+  olfactoryChance: 65
+  visualStrengthWeight: 2
+  visualRangeWeight: 10
+  auditoryStrengthWeight: 5
+  auditoryRangeWeight: 7
+  olfactoryStrengthWeight: 10
+  olfactoryRangeWeight: 5

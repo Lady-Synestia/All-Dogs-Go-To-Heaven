@@ -17,7 +17,7 @@ namespace Events.PlayerEvents
             _mousePosition = InputSystem.actions.FindAction("Look");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_moveAction.IsPressed())
             {

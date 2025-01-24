@@ -2,30 +2,15 @@ using UnityEngine;
 
 public class ItemFactory : MonoBehaviour
 {
-
-    [Header("Spawner Settings")] [SerializeField] [Range(0, 20)]
-    private int numberOfItems = 5;
-    
-    [Header("Visual Weightings")]
-    [SerializeField] [Range(0, 100)] private int visualChance = 100;
-    [SerializeField] [Range(0, 10)] private int visualStrengthWeight = 5;
-    [SerializeField] [Range(0, 10)] private int visualRangeWeight = 5;
-    [Header("Auditory Weightings")]
-    [SerializeField] [Range(0, 100)] private int auditoryChance = 100;
-    [SerializeField] [Range(0, 10)] private int auditoryStrengthWeight = 5;
-    [SerializeField] [Range(0, 10)] private int auditoryRangeWeight = 5;
-    [Header("Olfactory Weightings")]
-    [SerializeField] [Range(0, 100)] private int olfactoryChance = 100;
-    [SerializeField] [Range(0, 10)] private int olfactoryStrengthWeight = 5;
-    [SerializeField] [Range(0, 10)] private int olfactoryRangeWeight = 5;
+    [SerializeField]
+    private SpawnData spawnData;
 
     private const int SpawnRange = 24;
-    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        for (int i = 0; i < numberOfItems; i++)
+        for (int i = 0; i < spawnData.spawnCount; i++)
         {
             GameObject itemObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             itemObject.name = "Item " + i;
@@ -35,26 +20,22 @@ public class ItemFactory : MonoBehaviour
             itemObject.transform.localPosition = new Vector3(x, 3, z);
             Item item = itemObject.AddComponent<Item>();
 
-            if (visualChance == 100 || Random.Range(0, 100) <= visualChance)
-            { 
-                item.AddStimulus(new StimulusData(Stimulus.SenseType.Visual, Generate(visualStrengthWeight), Generate(visualRangeWeight)));
-            }
             
-            if (auditoryChance == 100 || Random.Range(0, 100) <= auditoryChance)
-            { 
-                item.AddStimulus(new StimulusData(Stimulus.SenseType.Auditory, Generate(auditoryStrengthWeight), Generate(auditoryRangeWeight)));
-            }
+            item.AddStimulus(GenerateStimulusData(Stimulus.SenseType.Visual, spawnData.visualChance, spawnData.visualStrengthWeight, spawnData.visualRangeWeight));
+            item.AddStimulus(GenerateStimulusData(Stimulus.SenseType.Auditory, spawnData.auditoryChance, spawnData.auditoryStrengthWeight, spawnData.auditoryRangeWeight));
+            item.AddStimulus(GenerateStimulusData(Stimulus.SenseType.Olfactory, spawnData.olfactoryChance, spawnData.olfactoryStrengthWeight, spawnData.olfactoryRangeWeight));
             
-            if (olfactoryChance == 100 || Random.Range(0, 100) <= olfactoryChance)
-            { 
-                item.AddStimulus(new StimulusData(Stimulus.SenseType.Olfactory, Generate(olfactoryStrengthWeight), Generate(olfactoryRangeWeight)));
-            }
         }
     }
 
-    private static int Generate(int weight)
+    private static StimulusData GenerateStimulusData(Stimulus.SenseType sense, int chance, int strengthWeight, int rangeWeight)
     {
-        int value = Random.Range(0, 5) * weight;
-        return value;
+        if (chance == 100 || Random.Range(0, 100) <= chance)
+        {
+            return new StimulusData(sense, Generate(strengthWeight), Generate(rangeWeight));
+        }
+        return new StimulusData(sense, 0, 0);
     }
+
+    private static int Generate(int weight) => Random.Range(0, 5) * weight;
 }
