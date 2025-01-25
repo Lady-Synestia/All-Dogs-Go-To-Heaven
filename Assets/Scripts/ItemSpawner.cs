@@ -8,7 +8,7 @@ public class ItemFactory : MonoBehaviour
     private const int SpawnRange = 24;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < spawnData.spawnCount; i++)
         {
@@ -17,7 +17,7 @@ public class ItemFactory : MonoBehaviour
             itemObject.transform.SetParent(transform);
             int x = Random.Range(-SpawnRange, SpawnRange);
             int z = Random.Range(-SpawnRange, SpawnRange);
-            itemObject.transform.localPosition = new Vector3(x, 3, z);
+            itemObject.transform.localPosition = new Vector3(x, 1, z);
             Item item = itemObject.AddComponent<Item>();
 
             

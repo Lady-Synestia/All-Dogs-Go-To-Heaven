@@ -8,6 +8,7 @@ namespace Events.DogEvents
         public enum Type
         {
             Stimulus,
+            SceneReady,
         }
 
         public DogEvent(Type type, EventArgs args) : base(type, args) { }

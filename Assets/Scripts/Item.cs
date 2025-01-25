@@ -6,6 +6,11 @@ public class Item : MonoBehaviour
 {
     public Dictionary<Stimulus.SenseType, StimulusData> Stimuli = new();
     public bool Inspected { get; set; }
+
+    private void OnEnable()
+    {
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
     
     public void AddStimulus(StimulusData data)
     {
