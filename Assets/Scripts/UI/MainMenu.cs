@@ -1,20 +1,14 @@
-using UnityEngine;
-using UnityEngine.UIElements;
+using System;
+using Events.UIEvents;
 
 namespace UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : UIElement
     {
-        private void Awake()
+        private void Start()
         {
-            VisualElement container = GetComponent<UIDocument>().rootVisualElement;
-            
-            Button quitButton = container.Q<Button>("Quit");
-            quitButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.Quit());
-            
-            Button playButton = container.Q<Button>("Play");
-            playButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.ChangeUI("MainMenu", "GameSettings"));
-            
+            RegisterButton("Quit", UIEvent.Type.Quit, EventArgs.Empty);
+            RegisterButton("Play", UIEvent.Type.ChangeUI, new UIEventArgs{ UIFrom = "MainMenu", UITo = "GameSettings" });
         }
     }
 }

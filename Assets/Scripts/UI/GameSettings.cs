@@ -1,30 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Events.UIEvents;
 
 namespace UI
 {
-    public class GameSettings : MonoBehaviour
+    public class GameSettings : UIElement
     {
-        [SerializeField]
-        private SpawnData spawnData;
-        private SpawnData _spawnDefaults;
-        
-        private void Awake()
+        private void Start()
         {
-            _spawnDefaults = ScriptableObject.CreateInstance<SpawnData>();
-            
-            VisualElement container = GetComponent<UIDocument>().rootVisualElement;
-            
-            Button backButton = container.Q<Button>("Back");
-            backButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.ChangeUI("GameSettings", "MainMenu"));
-            
-            Button playButton = container.Q<Button>("Play");
-            playButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.ChangeScene("Level"));
-            
-            Button resetButton = container.Q<Button>("Reset");
-            resetButton.RegisterCallback<MouseUpEvent>((evt) => spawnData.SetToDefault(_spawnDefaults));
+            RegisterButton("Back", UIEvent.Type.ChangeUI, new UIEventArgs{ UIFrom = "GameSettings", UITo = "MainMenu" });
+            RegisterButton("Play", UIEvent.Type.ChangeScene, new UIEventArgs{ SceneTarget = "Level"});
+            RegisterButton("Reset", UIEvent.Type.ResetData, EventArgs.Empty);
 
-            container.visible = false;
+            Root.visible = false;
         }
     }
 }

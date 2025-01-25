@@ -33,17 +33,17 @@ public class SpawnData : ScriptableObject
     {
         DontDestroyOnLoad(this);
     }
-    public void SetToDefault(SpawnData defaults)
+    public void SetData(SpawnData data)
     {
-        spawnCount = defaults.spawnCount;
-        visualChance = defaults.visualChance;
-        auditoryChance = defaults.auditoryChance;
-        olfactoryChance = defaults.olfactoryChance;
-        visualStrengthWeight = defaults.visualStrengthWeight;
-        visualRangeWeight = defaults.visualRangeWeight;
-        auditoryStrengthWeight = defaults.auditoryStrengthWeight;
-        auditoryRangeWeight = defaults.auditoryRangeWeight;
-        olfactoryStrengthWeight = defaults.olfactoryStrengthWeight;
-        olfactoryRangeWeight = defaults.olfactoryRangeWeight;
+        spawnCount = data.spawnCount;
+        visualChance = data.visualChance;
+        auditoryChance = data.auditoryChance;
+        olfactoryChance = data.olfactoryChance;
+        visualStrengthWeight = data.visualStrengthWeight;
+        visualRangeWeight = data.visualRangeWeight;
+        auditoryStrengthWeight = data.auditoryStrengthWeight;
+        auditoryRangeWeight = data.auditoryRangeWeight;
+        olfactoryStrengthWeight = data.olfactoryStrengthWeight;
+        olfactoryRangeWeight = data.olfactoryRangeWeight;
     }
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 namespace Events.PlayerEvents
 {
-    public class PlayerEventObserver : MonoBehaviour, IEventObserver<PlayerEvent>
+    /*public class PlayerEventObserver : MonoBehaviour, IEventObserver<PlayerEvent>
     {
         public event EventHandler<PlayerEvent> OnEvent;
         
@@ -10,5 +10,5 @@ namespace Events.PlayerEvents
         {
             OnEvent?.Invoke(this, e);
         }
-    }
+    }*/
 }

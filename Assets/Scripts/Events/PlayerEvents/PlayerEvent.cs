@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Events.PlayerEvents
 {
@@ -11,5 +12,10 @@ namespace Events.PlayerEvents
         }
 
         public PlayerEvent(Type type, EventArgs args) : base(type, args) { }
+    }
+    
+    public class MovementEventArgs : EventArgs
+    {
+        public Vector3 Value { get; set; }
     }
 }

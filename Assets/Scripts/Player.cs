@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         switch (e.EventType)
         {
             case PlayerEvent.Type.Move:
-                var moveArgs = (MovementEventArgs)e.Args;
+                MovementEventArgs moveArgs = (MovementEventArgs)e.Args;
                 Vector3 rotatedValues = new Vector3(0f, moveArgs.Value.y, 0f);
                 Vector2 direction2D = new Vector2(-moveArgs.Value.x, moveArgs.Value.z);
 

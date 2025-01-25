@@ -1,27 +1,29 @@
-using UnityEngine;
-using UnityEngine.UIElements;
+using System;
+using Events.UIEvents;
 
 namespace UI
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : UIElement
     {
-        private void OnEnable()
+        private void Start()
         {
-            VisualElement container = GetComponent<UIDocument>().rootVisualElement;
+            RegisterButton("Quit", UIEvent.Type.Quit, EventArgs.Empty);
+            RegisterButton("Resume", UIEvent.Type.Resume, EventArgs.Empty);
+            RegisterButton("Restart", UIEvent.Type.ChangeScene, new UIEventArgs{SceneTarget = "Level"});
+            RegisterButton("MainMenu", UIEvent.Type.ChangeScene, new UIEventArgs{SceneTarget = "Main Menu"});
             
-            Button quitButton = container.Q<Button>("Quit");
-            quitButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.Quit());
-            
-            Button resumeButton = container.Q<Button>("Resume");
-            resumeButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.Resume());
-            
-            Button restartButton = container.Q<Button>("Restart");
-            restartButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.ChangeScene("Level"));
-            
-            Button menuButton = container.Q<Button>("MainMenu");
-            menuButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.ChangeScene("Main Menu"));
+            Root.visible = false;
+            UIEventObserver.Instance.OnEvent += ButtonPressed;
+        }
 
-            container.visible = false;
+        private void ButtonPressed(object sender, UIEvent e)
+        {
+            Root.visible = e.EventType switch
+            {
+                UIEvent.Type.Pause => true,
+                UIEvent.Type.Resume => false,
+                _ => Root.visible
+            };
         }
     }
 }

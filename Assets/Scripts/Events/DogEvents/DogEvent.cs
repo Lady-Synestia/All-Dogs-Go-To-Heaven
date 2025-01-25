@@ -12,4 +12,9 @@ namespace Events.DogEvents
 
         public DogEvent(Type type, EventArgs args) : base(type, args) { }
     }
+    
+    public class StimulusEventArgs : EventArgs
+    {
+        public Stimulus Stimulus { get; set; }
+    }
 }

@@ -1,16 +1,27 @@
+using System;
+using Events.UIEvents;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI
 {
-    public class HUD : MonoBehaviour
+    public class HUD : UIElement
     {
-        private void OnEnable()
+        private void Start()
         {
-            VisualElement container = GetComponent<UIDocument>().rootVisualElement;
-            
-            Button pauseButton = container.Q<Button>("Pause");
-            pauseButton.RegisterCallback<MouseUpEvent>((evt) => ButtonActions.Pause());
+            RegisterButton("Pause", UIEvent.Type.Pause, EventArgs.Empty);
+
+            UIEventObserver.Instance.OnEvent += ButtonPressed;
+        }
+
+        private void ButtonPressed(object sender, UIEvent e)
+        {
+            Root.visible = e.EventType switch
+            {
+                UIEvent.Type.Pause => false,
+                UIEvent.Type.Resume => true,
+                _ => Root.visible
+            };
         }
     }
 }

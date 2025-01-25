@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Events.PlayerEvents
 {
-    public class PlayerMovementObserver: PlayerEventObserver
+    public class PlayerMovementObserver: EventObserver<PlayerEvent>
     {
         
         private InputAction _moveAction;
