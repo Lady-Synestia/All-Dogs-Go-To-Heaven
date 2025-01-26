@@ -42,9 +42,6 @@ public class Stimulus : MonoBehaviour
         _outline.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         _outline.generateLightingData = true;
         _outline.receiveShadows = false;
-        
-        _material = new Material(Shader.Find("Unlit/Color"));
-        
         _outline.enabled = false;
     }
 
@@ -56,6 +53,7 @@ public class Stimulus : MonoBehaviour
         _trigger.radius = data.Range;
         if (data.Range > 0)
         {
+            _material = new Material(_item.StimulusOutlineShader);
             _outline.positionCount = data.Range * 28;
             _outline.SetPositions(DrawCircle(data.Range));
             _material.SetColor("_Color", new Color((float)Data.Strength/10, 1, 0.2f, 1));

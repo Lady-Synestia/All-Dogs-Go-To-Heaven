@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnData: {fileID: 11400000, guid: 91a656a2486922a48b8eaf75f8841f70, type: 2}
+  outlineShader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &308334541
 GameObject:
   m_ObjectHideFlags: 0

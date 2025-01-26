@@ -4,6 +4,9 @@ public class ItemFactory : MonoBehaviour
 {
     [SerializeField]
     private SpawnData spawnData;
+    
+    [SerializeField]
+    private Shader outlineShader;
 
     private const int SpawnRange = 24;
     
@@ -19,7 +22,7 @@ public class ItemFactory : MonoBehaviour
             int z = Random.Range(-SpawnRange, SpawnRange);
             itemObject.transform.localPosition = new Vector3(x, 1, z);
             Item item = itemObject.AddComponent<Item>();
-
+            item.StimulusOutlineShader = outlineShader;
             
             item.AddStimulus(GenerateStimulusData(Stimulus.SenseType.Visual, spawnData.visualChance, spawnData.visualStrengthWeight, spawnData.visualRangeWeight));
             item.AddStimulus(GenerateStimulusData(Stimulus.SenseType.Auditory, spawnData.auditoryChance, spawnData.auditoryStrengthWeight, spawnData.auditoryRangeWeight));
