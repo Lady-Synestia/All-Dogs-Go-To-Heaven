@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Values used by the Item Factory to determine the properties of the items spawned.
+/// Bound to the sliders of the GameSettings UI Element so values can be edited by the player.
+/// </summary>
 [CreateAssetMenu(fileName = "SpawnData", menuName = "Scriptable Objects/SpawnData")]
 public class SpawnData : ScriptableObject
 {
@@ -31,10 +35,14 @@ public class SpawnData : ScriptableObject
     
     private void Awake()
     {
+        // allows data to persist after a level is completed
         DontDestroyOnLoad(this);
     }
+    
     public void SetData(SpawnData data)
     {
+        // used to set the data back to its default values
+        // could be used to set the data from another custom SpawnData object
         spawnCount = data.spawnCount;
         visualChance = data.visualChance;
         auditoryChance = data.auditoryChance;

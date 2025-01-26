@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace States
 {
+    /// <summary>
+    /// Initial state, and the state when there are no stimuli in the queue
+    /// </summary>
     public class IdleState : State
     {
         private const float Timer = 2.0f;
@@ -13,10 +16,12 @@ namespace States
         {
             if (!StateMachine.Queue.IsEmpty())
             {
-                StateMachine.CurrentState = new SeekState(StateMachine);
+                // transitions to seek state if there is anything in the queue
+                StateMachine.CurrentState = new SeekState(StateMachine, StateMachine.Queue.Peek());
             }
             else
             {
+                // if nothing is in the queue for 2 seconds, the game ends.
                 float timeElapsed = Time.time - _startTime;
                 if (timeElapsed >= Timer)
                 {

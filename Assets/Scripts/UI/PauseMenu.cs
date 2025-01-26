@@ -3,6 +3,9 @@ using Events.UIEvents;
 
 namespace UI
 {
+    /// <summary>
+    /// Class for the PauseMenu UI Document
+    /// </summary>
     public class PauseMenu : UIElement
     {
         protected override void PostLoad()
@@ -15,6 +18,7 @@ namespace UI
 
         protected override void UIEventRaised(object sender, UIEvent e)
         {
+            // visibility is toggled when the game is paused/resumed
             Root.visible = e.EventType switch
             {
                 UIEvent.Type.Pause => true,

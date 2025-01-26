@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace UI
 {
+    /// <summary>
+    /// Class for the GameSettings UI Document
+    /// </summary>
     public class GameSettings : UIElement
     {
         protected override void PostLoad()

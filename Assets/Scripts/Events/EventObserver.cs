@@ -3,7 +3,11 @@ using UnityEngine;
 
 namespace Events
 {
-    public abstract class EventObserver<T> : MonoBehaviour
+    /// <summary>
+    /// Base Class for the Event Observers. Provides Definitions for the common event functionality
+    /// </summary>
+    /// <typeparam name="T">The Type of Event to Raise</typeparam>
+    public abstract class EventObserver<T> : MonoBehaviour where T : GameEvent
     {
         public event EventHandler<T> OnEvent;
 

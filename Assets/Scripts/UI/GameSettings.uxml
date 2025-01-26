@@ -9,42 +9,33 @@
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container">
                     <engine:Label text="Visual Chance" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Chance in % for each item to have a visual stimulus" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container">
                     <engine:Label text="Auditory Chance" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Chance in % for each item to have an auditory stimulus" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container">
                     <engine:Label text="Olfactory Chance" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Chance in % for each item to have an olfactory stimulus" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement style="flex-grow: 1; height: 70px; justify-content: flex-end;">
                     <engine:Label text="Advanced" class="Subheading" style="font-size: 30px; align-items: auto; align-self: flex-start;" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
                     <engine:Label text="Visual Strength Weight" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Higher value = greater chance for stronger visual stimuli" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
                     <engine:Label text="Visual Range Weight" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Higher value = greater chance for visual stimuli with a larger radius" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
                     <engine:Label text="Auditory Strength Weight" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Higher value = greater chance for stronger auditory stimuli" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
                     <engine:Label text="Auditory Range Weight" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Higher value = greater chance for auditory stimuli with a larger radius" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
                     <engine:Label text="Olfactory Strength Weight" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Higher value = greater chance for stronger olfactory stimuli" class="hint" />
                 </engine:VisualElement>
                 <engine:VisualElement class="Slider-Container" style="flex-grow: 1;">
                     <engine:Label text="Olfactory Range Weight" class="Slider-Label" />
-                    <engine:Label text="?" tooltip="Higher value = greater chance for olfactory stimuli with a larger radius" class="hint" />
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="VisualElement" style="flex-grow: 1; align-items: flex-start; align-self: flex-start; justify-content: flex-start; -unity-text-align: upper-left;">

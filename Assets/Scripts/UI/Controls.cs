@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 namespace UI
 {
+    /// <summary>
+    /// Class for the Controls UI Document
+    /// </summary>
     public class Controls : UIElement
     {
         protected override void PostLoad()
