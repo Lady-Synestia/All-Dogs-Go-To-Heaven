@@ -2,21 +2,22 @@ using Events.DogEvents;
 using States;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class Dog : MonoBehaviour
 {
     
+    public DogEventObserver EventObserver { get; private set; }
+    public int ItemsInspected { get; private set; }
     private StateMachine _stateMachine;
-    private DogEventObserver _eventObserver;
     private const int TimeToWait = 0;
     private float _timeElapsed;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    private void Awake()
     {
-        _stateMachine = new StateMachine(GetComponent<NavMeshAgent>());
-        _eventObserver = gameObject.AddComponent<DogEventObserver>();
-        _eventObserver.OnEvent += EventRaised;
+        EventObserver = gameObject.AddComponent<DogEventObserver>();
+        EventObserver.Subscribe(EventRaised);
+        _stateMachine = new StateMachine(GetComponent<NavMeshAgent>(), EventObserver);
         _timeElapsed = TimeToWait;
     }
 
@@ -38,6 +39,9 @@ public class Dog : MonoBehaviour
                 var stimulusArgs = (StimulusEventArgs)e.Args;
                 StimulusEncountered(stimulusArgs.Stimulus);
                 break;
+            case DogEvent.Type.ItemInspected:
+                ItemsInspected++;
+                break;
         }
     }
 
@@ -48,6 +52,5 @@ public class Dog : MonoBehaviour
         int priority = Mathf.RoundToInt(stimulus.Data.Strength/ distance);
         // Debug.Log($"Item: {stimulus.transform.parent.name}. Stimulus: {stimulus.Data.Sense}. Priority: {priority}. Strength: {stimulus.Data.Strength}. Distance: {distance}.");
         _stateMachine.AddToQueue(stimulus, priority);
-        
     }
 }

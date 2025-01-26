@@ -4,6 +4,7 @@
         <engine:Label text="All Dogs Go To Heaven" class="Heading" style="margin-top: 46px;" />
         <engine:VisualElement class="Button-Container">
             <engine:Button text="Play" selectable="true" name="Play" focusable="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="true" enable-rich-text="true" class="Button" style="margin-top: 45px; margin-bottom: 45px;" />
+            <engine:Button text="Controls" name="Controls" class="Button" />
             <engine:Button text="Quit" name="Quit" selectable="false" double-click-selects-word="false" triple-click-selects-line="false" class="Button" style="margin-top: 45px; margin-bottom: 45px;" />
         </engine:VisualElement>
     </engine:VisualElement>

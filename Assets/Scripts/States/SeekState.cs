@@ -1,10 +1,10 @@
 ﻿namespace States
 {
-    internal class SeekState : State
+    public class SeekState : State
     {
         private Stimulus _stimulus;
         
-        internal override void Execute()
+        public override void Execute()
         {
             if (StateMachine.Agent.remainingDistance == 0 || _stimulus.Inspected())
             {
@@ -13,6 +13,7 @@
             }
             else if (StateMachine.Queue.Peek() != _stimulus)
             {
+                _stimulus.Focused(false);
                 StateMachine.CurrentState = new SeekState(StateMachine);
             }
         }
@@ -21,6 +22,7 @@
         {
             StateMachine = stateMachine;
             _stimulus = StateMachine.Queue.Peek();
+            _stimulus.Focused(true);
             StateMachine.Agent.destination = _stimulus.transform.parent.position;
         }
     }

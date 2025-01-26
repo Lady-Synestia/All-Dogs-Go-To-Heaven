@@ -5,23 +5,26 @@ using Events.UIEvents;
 
 namespace UI
 {
-    public class UIElement : MonoBehaviour
+    public abstract class UIElement : MonoBehaviour
     {
         protected VisualElement Root;
+        public void Load()
+        {
+            Root = GetComponent<UIDocument>().rootVisualElement;
+            Root.visible = false;
+            UIEventObserver.Instance.Subscribe(OnUIEvent);
+            PostLoad();
+        }
         
         protected void RegisterButton(string label, UIEvent.Type type, EventArgs args)
         {
             Button button = Root.Q<Button>(label);
             button.RegisterCallback<MouseUpEvent>(evt => UIEventObserver.Instance.RaiseEvent(new UIEvent(type, args)));
         }
-
-        private void Awake()
-        {
-            Root = GetComponent<UIDocument>().rootVisualElement;
-            UIEventObserver.Instance.OnEvent += OnButtonPress;
-        }
-
-        protected void OnButtonPress(object sender, UIEvent e)
+        
+        protected abstract void PostLoad();
+        
+        protected void OnUIEvent(object sender, UIEvent e)
         {
             switch (e.EventType)
             {
@@ -36,7 +39,13 @@ namespace UI
                         Root.visible = true;
                     }
                     break;
+                case UIEvent.Type.GameEnd:
+                    Root.visible = false;
+                    break;
             }
+            UIEventRaised(sender, e);
         }
+        
+        protected virtual void UIEventRaised(object sender, UIEvent e) {}
     }
 }

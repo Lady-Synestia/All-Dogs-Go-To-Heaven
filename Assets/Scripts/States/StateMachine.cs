@@ -1,17 +1,19 @@
-﻿using UnityEngine;
+﻿using Events.DogEvents;
 using UnityEngine.AI;
 
 namespace States
 {
     public class StateMachine
     {
-        internal State CurrentState;
-        internal readonly NavMeshAgent Agent;
-        internal BucketQueue<Stimulus> Queue = new();
+        public State CurrentState;
+        public readonly NavMeshAgent Agent;
+        public readonly DogEventObserver DogEventObserver;
+        public BucketQueue<Stimulus> Queue = new();
         
-        public StateMachine(NavMeshAgent agent)
+        public StateMachine(NavMeshAgent agent, DogEventObserver dogEventObserver)
         {
             Agent = agent;
+            DogEventObserver = dogEventObserver;
             CurrentState = new IdleState(this);
         }
         

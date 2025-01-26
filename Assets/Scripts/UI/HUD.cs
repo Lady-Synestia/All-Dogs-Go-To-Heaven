@@ -1,20 +1,17 @@
 using System;
 using Events.UIEvents;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace UI
 {
     public class HUD : UIElement
     {
-        private void Start()
+        protected override void PostLoad()
         {
             RegisterButton("Pause", UIEvent.Type.Pause, EventArgs.Empty);
-
-            UIEventObserver.Instance.OnEvent += ButtonPressed;
+            Root.visible = true;
         }
 
-        private void ButtonPressed(object sender, UIEvent e)
+        protected override void UIEventRaised(object sender, UIEvent e)
         {
             Root.visible = e.EventType switch
             {
@@ -25,5 +22,3 @@ namespace UI
         }
     }
 }
-
-

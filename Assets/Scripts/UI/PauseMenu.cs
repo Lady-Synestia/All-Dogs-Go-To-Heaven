@@ -5,18 +5,15 @@ namespace UI
 {
     public class PauseMenu : UIElement
     {
-        private void Start()
+        protected override void PostLoad()
         {
             RegisterButton("Quit", UIEvent.Type.Quit, EventArgs.Empty);
             RegisterButton("Resume", UIEvent.Type.Resume, EventArgs.Empty);
             RegisterButton("Restart", UIEvent.Type.ChangeScene, new UIEventArgs{SceneTarget = "Level"});
             RegisterButton("MainMenu", UIEvent.Type.ChangeScene, new UIEventArgs{SceneTarget = "Main Menu"});
-            
-            Root.visible = false;
-            UIEventObserver.Instance.OnEvent += ButtonPressed;
         }
 
-        private void ButtonPressed(object sender, UIEvent e)
+        protected override void UIEventRaised(object sender, UIEvent e)
         {
             Root.visible = e.EventType switch
             {

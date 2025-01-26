@@ -1,19 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using Events.DogEvents;
+using UnityEngine;
 
 namespace States
 {
-    internal class InspectState : State
+    public class InspectState : State
     {
         private const float Timer = 1.0f;
         private float _startTime;
         private Stimulus _stimulus;
         
-        internal override void Execute()
+        public override void Execute()
         {
             float timeElapsed = Time.time - _startTime;
             if (timeElapsed >= Timer)
             {
                 _stimulus.Inspect();
+                StateMachine.DogEventObserver.RaiseEvent(new DogEvent(DogEvent.Type.ItemInspected, EventArgs.Empty));
                 StateMachine.CurrentState = new IdleState(StateMachine);
             }
         }

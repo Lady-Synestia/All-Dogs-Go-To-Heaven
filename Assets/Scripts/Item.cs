@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
             GameObject stimulusObject = new ($"{data.Sense} Stimulus", typeof(Stimulus));
             stimulusObject.transform.SetParent(transform);
             stimulusObject.transform.localPosition = Vector3.zero;
-            stimulusObject.GetComponent<Stimulus>().Create(data);
+            stimulusObject.GetComponent<Stimulus>().Create(this, data);
         }
     }
 }

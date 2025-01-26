@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Events.UIEvents
+﻿namespace Events.UIEvents
 {
     public class UIEventObserver : EventObserver<UIEvent>
     {

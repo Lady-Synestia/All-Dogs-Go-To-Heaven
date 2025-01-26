@@ -1,21 +1,16 @@
 using System;
-using UnityEngine;
-using UnityEngine.UIElements;
 using Events.UIEvents;
+using UnityEngine;
 
 namespace UI
 {
     public class GameSettings : UIElement
     {
-        private void Start()
+        protected override void PostLoad()
         {
-            RegisterButton("Back", UIEvent.Type.ChangeUI, new UIEventArgs{ UIFrom = "GameSettings", UITo = "MainMenu" });
+            RegisterButton("Back", UIEvent.Type.ChangeUI, new UIEventArgs{ UIFrom = "Game Settings", UITo = "Main Menu" });
             RegisterButton("Play", UIEvent.Type.ChangeScene, new UIEventArgs{ SceneTarget = "Level"});
             RegisterButton("Reset", UIEvent.Type.ResetData, EventArgs.Empty);
-
-            Root.visible = false;
         }
     }
 }
-
-

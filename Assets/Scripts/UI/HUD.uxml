@@ -1,4 +1,24 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/Styles.uss?fileID=7433441132597879392&amp;guid=a50475ba300546241872d52c8b4fefd2&amp;type=3#Styles" />
-    <engine:Button text="Pause" name="Pause" class="Button" style="width: 100px; color: rgb(255, 255, 255); align-self: flex-end;" />
+    <engine:VisualElement style="flex-grow: 1; position: absolute; top: 20px; left: auto; right: 30px;">
+        <engine:Button text="Pause" name="Pause" class="Button" style="width: 100px; color: rgb(255, 255, 255); align-self: flex-end;" />
+    </engine:VisualElement>
+    <engine:VisualElement style="flex-grow: 1; position: absolute; top: 20px; left: 30px; font-size: 25px; flex-direction: row; -unity-font-style: bold;">
+        <engine:VisualElement style="flex-grow: 1; align-self: auto; align-items: flex-end; -unity-font-style: bold;">
+            <engine:Label text="Time:" />
+            <engine:Label text="Items:" />
+        </engine:VisualElement>
+        <engine:VisualElement style="flex-grow: 1;">
+            <engine:Label text="Label" data-source="project://database/Assets/GameData.asset?fileID=11400000&amp;guid=cb22a2255eb879e4fb23460d8e06416c&amp;type=2#GameData" data-source-path="time">
+                <Bindings>
+                    <engine:DataBinding property="text" data-source-path="time" data-source="project://database/Assets/GameData.asset?fileID=11400000&amp;guid=cb22a2255eb879e4fb23460d8e06416c&amp;type=2#GameData" binding-mode="ToTarget" />
+                </Bindings>
+            </engine:Label>
+            <engine:Label text="Label" data-source="project://database/Assets/GameData.asset?fileID=11400000&amp;guid=cb22a2255eb879e4fb23460d8e06416c&amp;type=2#GameData" data-source-path="itemsInspected">
+                <Bindings>
+                    <engine:DataBinding property="text" data-source-path="itemsInspected" data-source="project://database/Assets/GameData.asset?fileID=11400000&amp;guid=cb22a2255eb879e4fb23460d8e06416c&amp;type=2#GameData" binding-mode="ToTarget" />
+                </Bindings>
+            </engine:Label>
+        </engine:VisualElement>
+    </engine:VisualElement>
 </engine:UXML>

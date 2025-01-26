@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public record StimulusData(Stimulus.SenseType Sense, int Strength, int Range, int DecayRate = 0)
@@ -25,6 +26,8 @@ public class Stimulus : MonoBehaviour
     private SphereCollider _trigger;
     private LineRenderer _outline;
     private Material _material;
+    private bool _focused;
+    private Item _item;
     private void Awake()
     {
         gameObject.tag = "Stimulus";
@@ -45,8 +48,9 @@ public class Stimulus : MonoBehaviour
         _outline.enabled = false;
     }
 
-    public void Create(StimulusData data)
+    public void Create(Item item, StimulusData data)
     {
+        _item = item;
         Data = data;
         HasDecay = data.DecayRate > 0;
         _trigger.radius = data.Range;
@@ -82,17 +86,25 @@ public class Stimulus : MonoBehaviour
         StartCoroutine(ShowRange());
     }
 
-    public bool Inspected()
+    public void Focused(bool isFocused)
     {
-        Item item = transform.parent.GetComponent<Item>();
-        return item.Inspected;
+        if (isFocused)
+        {
+            _focused = true;
+            Material material = new(Shader.Find("Unlit/Color"));
+            material.SetColor("_Color", Color.cyan);
+            _outline.material = material;
+            return;
+        }
+        _outline.material = _material;
     }
 
+    public bool Inspected() => _item.Inspected;
+    
     public void Inspect()
     {
-        Item item = transform.parent.GetComponent<Item>();
-        item.Inspected = true;
-        item.gameObject.SetActive(false);
+        _item.Inspected = true;
+        _item.gameObject.SetActive(false);
     }
 
     private IEnumerator ShowRange()
@@ -102,6 +114,10 @@ public class Stimulus : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         for (float g = 1; g >= 0.4f; g -= 0.6f/steps)
         {
+            if (_focused)
+            {
+                yield return new WaitUntil(() => !_focused);
+            }
             _material.SetColor("_Color", new Color((float)Data.Strength/10, g, 0.2f, 1));
             _outline.material = _material;
             yield return new WaitForSeconds(3f/steps);

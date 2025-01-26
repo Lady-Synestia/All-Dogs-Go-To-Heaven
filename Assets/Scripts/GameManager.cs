@@ -1,21 +1,29 @@
 ﻿using System;
 using UnityEngine;
 using Events.UIEvents;
+using UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private SpawnData spawnData;
+    [SerializeField] private SpawnData spawnData;
     private SpawnData _spawnDataDefaults;
     
-    private void Start()
+    [SerializeField] private GameObject uiParent;
+
+    private void Awake()
     {
+        gameObject.AddComponent<UIEventObserver>();
         _spawnDataDefaults = ScriptableObject.CreateInstance<SpawnData>();
-        UIEventObserver.Instance.OnEvent += ButtonPressed;
+        UIEventObserver.Instance.Subscribe(OnUIEvent);
+
+        foreach (UIElement element in uiParent.GetComponentsInChildren<UIElement>())
+        {
+            element.Load();
+        }
     }
 
-    private void ButtonPressed(object sender, UIEvent e)
+    protected void OnUIEvent(object sender, UIEvent e)
     {
         switch (e.EventType)
         {
@@ -35,6 +43,9 @@ public class GameManager : MonoBehaviour
                 var args = (UIEventArgs)e.Args;
                 Time.timeScale = 1;
                 SceneManager.LoadScene(args.SceneTarget);
+                break;
+            case UIEvent.Type.GameEnd:
+                Time.timeScale = 0;
                 break;
         }
     }

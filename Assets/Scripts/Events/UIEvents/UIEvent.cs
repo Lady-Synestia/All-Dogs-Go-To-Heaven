@@ -11,7 +11,8 @@ namespace Events.UIEvents
             Pause,
             Resume,
             ResetData,
-            Quit
+            Quit,
+            GameEnd
         }
         
         public UIEvent(Type type, EventArgs args) : base(type, args) { }

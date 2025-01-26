@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _movementEventObserver = gameObject.AddComponent<PlayerMovementObserver>();
-        _movementEventObserver.OnEvent += MovementEventRaised;
+        _movementEventObserver.Subscribe(MovementEventRaised);
     }
     private void FixedUpdate()
     {

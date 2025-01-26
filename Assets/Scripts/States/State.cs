@@ -1,10 +1,10 @@
 ﻿namespace States
 {
-    internal abstract class State 
+    public abstract class State 
     {
         protected StateMachine StateMachine;
         
-        internal abstract void Execute();
+        public abstract void Execute();
         
         protected State(StateMachine stateMachine) { StateMachine = stateMachine; }
     }

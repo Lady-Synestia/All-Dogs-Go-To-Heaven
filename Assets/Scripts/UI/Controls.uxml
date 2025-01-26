@@ -1,0 +1,12 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Styles.uss?fileID=7433441132597879392&amp;guid=a50475ba300546241872d52c8b4fefd2&amp;type=3#Styles" />
+    <engine:VisualElement class="UI-Container" style="flex-grow: 1;">
+        <engine:Label text="Controls" class="Heading" />
+        <engine:VisualElement style="flex-grow: 1; margin-left: 100px; margin-right: 100px; font-size: 25px; margin-top: 50px; margin-bottom: 50px;">
+            <engine:Label text="Move Camera:&#10;&#x9;Horizontal - WASD&#10;&#x9;Up - E&#10;&#x9;Down - Q&#10;&#10;Look:&#10;&#x9;Hold Right Click and move mouse" />
+        </engine:VisualElement>
+        <engine:VisualElement class="Button-Container" style="flex-grow: 1;">
+            <engine:Button text="Back" name="Back" class="Button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
