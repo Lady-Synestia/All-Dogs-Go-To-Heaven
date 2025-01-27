@@ -16,7 +16,7 @@ namespace States
         public DogEventObserver DogEventObserver { get; private set; }
         
         // Priority queue storing the encountered stimuli
-        public BucketQueue<Stimulus> Queue { get; } = new();
+        public BucketQueue<Stimulus> Queue { get; } = new(BucketQueue.OrderType.Lifo);
         
         public StateMachine(NavMeshAgent agent, DogEventObserver dogEventObserver)
         {

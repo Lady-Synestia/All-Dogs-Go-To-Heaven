@@ -1,17 +1,27 @@
+using System;
 using System.Collections.Generic;
+
+public abstract class BucketQueue
+{
+    public enum OrderType
+    {
+        Fifo,
+        Lifo
+    }
+}
 
 /// <summary>
 /// Generic Priority Queue type, implemented as a bucket queue.
 /// </summary>
-/// <typeparam name="T">Data type to store</typeparam>
-public class BucketQueue<T>
+/// <typeparam name="TValue">Data type to store</typeparam>
+public class BucketQueue<TValue> : BucketQueue
 {
     /*
      * The Bucket Queue holds a dictionary of linked lists where:
      *      - The dictionary's keys correspond to each priority
      *      - The Linked Lists are the 'bucket' of values for each priority
      *
-     * To insert, the value is added to the end of the linked list for its priority.
+     * To insert, the value is added to the linked list for its priority.
      * The use of a hash table in the form of a dictionary ensures this is an O(1) operation
      *
      * To Dequeue, the first value in the list with the highest priority is extracted.
@@ -26,17 +36,20 @@ public class BucketQueue<T>
      * should not be too large.
      */
     
+    public OrderType Order { get; private set; }
     
-    private Dictionary<int, LinkedList<T>> _buckets = new();
+    private Dictionary<int, LinkedList<TValue>> _buckets = new();
     private int _highestPriority;
+    
+    public BucketQueue(OrderType order) {Order = order;}
 
-    public bool Insert(int priority, T value)
+    public bool Insert(int priority, TValue value)
     {
         bool newHighest = false;
         
         // if the priority is not already in the dictionary, a new key-value pair is made,
         // and the priority is compared with the current highest priority
-        if (_buckets.TryAdd(priority, new LinkedList<T>()))
+        if (_buckets.TryAdd(priority, new LinkedList<TValue>()))
         {
             if (priority > _highestPriority)
             {
@@ -44,25 +57,41 @@ public class BucketQueue<T>
                 newHighest = true;
             }
         }
-        _buckets[priority].AddLast(value);
-        
+        switch (Order)
+        {
+            case OrderType.Fifo:
+                _buckets[priority].AddLast(value);
+                break;
+            case OrderType.Lifo:
+                // if the priority is already in the dictionary, and is the highest priority,
+                // the new value is the new highest priority value
+                if (priority == _highestPriority)
+                {
+                    newHighest = true;
+                }
+                _buckets[priority].AddFirst(value);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
         // if the new priority is now the highest, returns true
         return newHighest;
     }
 
-    public T Dequeue()
+    public TValue Dequeue()
     {
         // extraction is O(1) in the best case
-        T toExtract = _buckets[_highestPriority].First.Value;
+        TValue toExtract = _buckets[_highestPriority].First.Value;
         _buckets[_highestPriority].RemoveFirst();
 
-        // finding the new highest priority
+        
         if (_buckets[_highestPriority].Count == 0)
         {
             _buckets.Remove(_highestPriority);
             _highestPriority = 0;
             if (!IsEmpty())
             {
+                // finding the new highest priority
                 foreach (int key in _buckets.Keys)
                 {
                     if (key > _highestPriority)
@@ -75,7 +104,7 @@ public class BucketQueue<T>
         return toExtract;
     }
     
-    public T Peek()
+    public TValue Peek()
     {
         return _buckets[_highestPriority].First.Value;
     }

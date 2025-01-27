@@ -129,6 +129,7 @@ namespace Items
                 _outline.material = material;
                 return;
             }
+            // set back to original material when unfocused
             _outline.material = _material;
         }
     
@@ -173,7 +174,7 @@ namespace Items
         /// calculates red value for the outline colour
         /// </summary>
         /// <returns></returns>
-        private float Red() => (float)Data.Strength/10;
+        private float Red() => (float)Data.Strength/30;
         
         /// <summary>
         /// Calculates a list of Vector3's representing points of a circle.

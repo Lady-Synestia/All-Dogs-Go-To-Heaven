@@ -59,8 +59,16 @@ public class Dog : MonoBehaviour
         
         // calculating the priority of the stimulus and adding it to the priority queue
         float distance = Vector3.Distance(transform.position, stimulus.transform.position);
-        int priority = Mathf.RoundToInt(stimulus.Data.Strength/ distance);
+        int priority = CalculatePriority(stimulus.Data, distance);
         _stateMachine.AddToQueue(stimulus, priority);
         // Debug.Log($"Encountered Stimulus: {stimulus.Data.Strength} strength, distance: {distance} priority: {priority}");
+    }
+
+    private static int CalculatePriority(StimulusData data, float distance)
+    {
+        // priority is based on the strength, type, and distance from the stimulus
+        int interest = data.Strength * ((int)data.Sense + 1);
+        int priority = Mathf.RoundToInt(interest/ distance);
+        return priority;
     }
 }

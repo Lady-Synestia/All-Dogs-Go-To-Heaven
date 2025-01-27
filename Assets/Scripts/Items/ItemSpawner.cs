@@ -24,9 +24,7 @@ namespace Items
                 GameObject itemObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 itemObject.name = "Item " + i;
                 itemObject.transform.SetParent(transform);
-                int x = Random.Range(-SpawnRange, SpawnRange);
-                int z = Random.Range(-SpawnRange, SpawnRange);
-                itemObject.transform.localPosition = new Vector3(x, 1, z);
+                itemObject.transform.localPosition = GenerateSpawnPosition();
                 
                 // setting up the item object
                 Item item = itemObject.AddComponent<Item>();
@@ -38,7 +36,19 @@ namespace Items
                 
             }
         }
-    
+
+        /// <summary>
+        /// Generates a random spawn position within the bounds of the scene
+        /// </summary>
+        /// <returns>Vector3 position for the item</returns>
+        private static Vector3 GenerateSpawnPosition()
+        {
+            int x = Random.Range(-SpawnRange, SpawnRange);
+            int z = Random.Range(-SpawnRange, SpawnRange);
+
+            return new Vector3(x, 1, z);
+        }
+
         /// <summary>
         /// Instantiates a stimulus data object based on the chance and weights provided.
         /// </summary>
@@ -51,14 +61,16 @@ namespace Items
         {
             if (chance == 100 || Random.Range(0, 100) <= chance)
             {
-                return new StimulusData(sense, Generate(strengthWeight), Generate(rangeWeight));
+                return new StimulusData(sense, GenerateFromWeight(strengthWeight), GenerateFromWeight(rangeWeight));
             }
             // returns an empty object if the stimulus isn't created
             return new StimulusData(sense, 0, 0);
         }
         
         // generates a strength or range value in the range 1-50
-        private static int Generate(int weight) => Random.Range(1, 5) * weight;
+        private static int GenerateFromWeight(int weight) => Random.Range(1, 5) * weight;
+
+        
     }
 
 }
